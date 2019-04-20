@@ -46,7 +46,7 @@ python stock.py -f stocklist -i -s sourcefile -t time
 python news.py -s sourcefile -t time -n number
 ```
 
--s: 要将股票信息插入哪个文本文件中。默认stock.py。
+-s: 要将股票信息插入哪个文本文件中。默认news.py。
 
 -t: 新闻显示多长时间（分钟）。默认一分钟。
 
