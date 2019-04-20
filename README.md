@@ -1,8 +1,6 @@
 # 摸鱼工具集
 
-## stock.py 将股票信息插入代码中，让人以为你在看代码，实际上是在看股票。
-
-# dependencies
+## dependencies
 
 1. tushare
 2. windows-curses
@@ -11,6 +9,9 @@
 ```
 pip install -r requirements.txt
 ```
+
+## stock.py 将股票信息插入代码中，让人以为你在看代码，实际上是在看股票。
+
 # usage
 
 ```
@@ -31,8 +32,22 @@ python stock.py -f stocklist -i -s sourcefile -t time
 
 1. 如果网络超时请求不到股票数据会报错。
 
-2. 股票名称挤在一起显示。
+2. 如果窗口宽度过小，最后股票信息会换行。
 
-3. 如果窗口宽度过小，最后股票信息会换行。
+3. 不能在运行时随意调整窗口大小，否则会造成显示错位。
 
-4. 不能在运行时随意调整窗口大小，否则会造成显示错位。
+## news.py 将新闻信息插入代码中，让人以为你在看代码，实际在看新闻。
+
+新闻从[中国新闻网](http://www.chinanews.com/importnews.html)抓取。
+
+# usage
+
+```
+python news.py -s sourcefile -t time -n number
+```
+
+-s: 要将股票信息插入哪个文本文件中。默认stock.py。
+
+-t: 新闻显示多长时间（分钟）。默认一分钟。
+
+-n: 显示多少条新闻。默认5条。
