@@ -1,28 +1,6 @@
 import sys, getopt, time
 import tushare as ts
-import curses
-
-def initCurses():
-    stdscr = curses.initscr()
-    stdscr.clear()
-    stdscr.refresh()
-    curses.start_color()
-    curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK)
-    curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
-    curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
-    curses.init_pair(4, curses.COLOR_GREEN, curses.COLOR_BLACK)
-    return stdscr
-
-def mPrint(stdscr, x, y, mStr, isComment):
-    try:
-        if isComment:
-            stdscr.attron(curses.color_pair(4))    
-            stdscr.addstr(y, x, "// " + mStr)
-            stdscr.attroff(curses.color_pair(4))        
-        else:
-            stdscr.addstr(y, x, mStr)    
-    except Exception as identifier:
-        return
+from commons.curses_functions import initCurses, mPrint
 
 def strHeader(mList, width):
     mStr = ""
@@ -41,7 +19,7 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv,"hf:is:t:",["file="])
     except getopt.GetoptError:
-        print ('stock.py -i <stocklist>')
+        print ('stock.py -f <stocklist> -i -s <sourcefile> -t <time (mins)>')
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
@@ -72,7 +50,7 @@ def main(argv):
             mPrint(stdscr, x, y, line.strip(), False)
     # display the header
     headerList = ['code','name', 'pre_close', 'price','high','low','volume','amount','time']
-    headers = strHeader(headerList, W)
+    headers = strHeader(headerList, W + 1)
     mPrint(stdscr, 0, 0, headers, True)
     while cou > 0:
         # display real-time stock price
@@ -83,7 +61,11 @@ def main(argv):
             y = (i + 1) * 2
             x = 0
             for value in headerList:
-                content += df.loc[i, value].center(W)
+                if value == "name":
+                    tmp_str = "".join([" " + ch for ch in df.loc[i, value]])
+                    content += tmp_str.center(W)
+                else:
+                    content += df.loc[i, value].center(W)
             mPrint(stdscr, x, y, content, True)
         # display real-time index
         if isShowIndex:
@@ -100,7 +82,11 @@ def main(argv):
                 index = tmp_df.index[0]
                 for value in indexHeaderList:
                     if isinstance(tmp_df.loc[index, value], str):
-                        content += tmp_df.loc[index, value].center(W)
+                        if value == "name":
+                            tmp_str = "".join([" " + ch for ch in tmp_df.loc[index, value]])
+                            content += tmp_str.center(W)
+                        else:
+                            content += tmp_df.loc[index, value].center(W)
                     else:
                         if value in ["preclose", "open", "close", "high", "low"]:
                             tmp_str = "{0: 4.3f}".format(tmp_df.loc[index, value]).center(W)
