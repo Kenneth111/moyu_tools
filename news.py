@@ -6,7 +6,7 @@ from commons.curses_functions import initCurses, mPrint
 
 def main(argv):
     sourcefile = "news.py"
-    cou = 6
+    t = 6
     n = 5
     try:
         opts, args = getopt.getopt(argv,"s:n:")
@@ -20,7 +20,7 @@ def main(argv):
         elif opt == "-s":
             sourcefile = arg
         elif opt == "-t":
-            cou = int(arg) * 6    
+            t = int(arg) * 6    
         elif opt == "-n":
             n = int(arg)
     headers = {
@@ -50,7 +50,7 @@ def main(argv):
         y = i * 2
         mPrint(stdscr, x, y, titles_links[i], True)
     stdscr.refresh()
-    time.sleep(10)
+    time.sleep(t * 10)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
