@@ -3,8 +3,10 @@ beautifulsoup4==4.7.1
 certifi==2019.3.9
 chardet==3.0.4
 colorama==0.4.1
+future==0.17.1
 idna==2.8
 isort==4.3.17
+itchat==1.2.32
 lazy-object-proxy==1.3.1
 lxml==4.3.3
 mccabe==0.6.1
@@ -12,6 +14,8 @@ msgpack==0.6.1
 numpy==1.16.2
 pandas==0.24.2
 pylint==2.3.1
+pypng==0.0.19
+PyQRCode==1.2.1
 python-dateutil==2.8.0
 pytz==2019.1
 pyzmq==18.0.1
@@ -24,3 +28,4 @@ typed-ast==1.3.4
 urllib3==1.24.2
 windows-curses==1.1
 wrapt==1.11.1
+wxpy==0.3.9.8

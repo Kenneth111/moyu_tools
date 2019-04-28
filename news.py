@@ -3,7 +3,6 @@ import requests
 import bs4
 from commons.curses_functions import initCurses, mPrint
 
-
 def main(argv):
     sourcefile = "news.py"
     t = 6
